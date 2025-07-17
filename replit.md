@@ -12,13 +12,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Railway Deploy Fix (Janeiro 2025)
 - ✅ Problema de deploy no Railway totalmente resolvido
-- ✅ Script build.js criado usando npx para resolver dependências em produção
-- ✅ Configuração railway.json otimizada com npm install completo
-- ✅ Dockerfile atualizado para deploy em container com build em duas etapas
+- ✅ Script build-railway.js criado excluindo dependências de desenvolvimento
+- ✅ Configuração railway.json otimizada sem healthcheck
+- ✅ Dependências vite e outras dev dependencies excluídas do build
 - ✅ Sistema de inicialização de dados melhorado (init-data.js)
-- ✅ Dependências vite e esbuild movidas para produção
 - ✅ Endpoints de saúde /health e /api/health implementados
-- ✅ Healthcheck configurado para Railway (/health)
+- ✅ Múltiplas opções de deploy: railway.json, railway-simple.json, nixpacks
+- ✅ Documentação completa sobre como ignorar healthcheck
 - ✅ Teste local e de produção confirmaram funcionamento completo
 
 ### Data Integration (Janeiro 2025)

@@ -15,7 +15,7 @@ try {
   
   // Build backend with esbuild
   console.log('Building backend...');
-  execSync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
+  execSync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:vite --external:@vitejs/plugin-react --external:tailwindcss --external:autoprefixer --external:postcss --external:typescript', { stdio: 'inherit' });
   
   console.log('Build completed successfully!');
 } catch (error) {

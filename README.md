@@ -40,9 +40,10 @@ Um portfólio moderno e responsivo desenvolvido em React com tema escuro inspira
 3. As configurações estão em `railway.json`
 
 ### Opção 2: Deploy Manual
-1. Faça build do projeto: `npm run build`
-2. Suba os arquivos para o Railway
-3. Configure as variáveis de ambiente se necessário
+1. Inicialize os dados: `node init-data.js`
+2. Faça build do projeto: `node build.js`
+3. Inicie o servidor: `npm start`
+4. Configure as variáveis de ambiente se necessário
 
 ### Configurações Railway
 

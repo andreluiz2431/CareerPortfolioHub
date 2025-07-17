@@ -13,8 +13,8 @@ RUN npm ci --only=production
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Initialize data and build the application
+RUN node init-data.js && node build.js
 
 # Expose the port
 EXPOSE 5000

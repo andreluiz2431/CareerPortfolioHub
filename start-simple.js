@@ -1,17 +1,9 @@
-#!/usr/bin/env node
+import { execSync } from 'child_process';
 
-// Super simple start script for Railway
-import { existsSync } from 'fs';
+console.log('Initializing data...');
+execSync('node init-data.js', { stdio: 'inherit' });
 
-// Set production environment
+console.log('Starting production server...');
 process.env.NODE_ENV = 'production';
-
-// Check if build exists
-if (!existsSync('dist/index.js')) {
-  console.log('Build not found, please run build first');
-  process.exit(1);
-}
-
-// Start the server directly
-console.log('Starting server...');
-await import('./dist/index.js');
+process.env.PORT = process.env.PORT || '3000';
+execSync('node dist/index.js', { stdio: 'inherit' });

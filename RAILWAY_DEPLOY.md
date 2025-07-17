@@ -1,117 +1,60 @@
-# Railway Deploy - Resolução do Problema de Healthcheck
+# Railway Deploy - Portfolio
 
-## Problema Identificado
-O Railway está falhando no healthcheck mesmo com a aplicação funcionando corretamente.
+## Deploy Simples (Recomendado)
 
-## Configurações Implementadas
+1. **Renomeie o arquivo**: `railway-simple.json` para `railway.json`
+2. **Faça o deploy no Railway**
+3. **Configure a variável PORT**: O Railway define automaticamente
+4. **Done!** - O site estará online
 
-### 1. Endpoints de Saúde
-- `/health` - Endpoint principal (HTTP 200)
-- `/api/health` - Endpoint alternativo (HTTP 200)  
-- `/healthz` - Endpoint padrão Railway (HTTP 200)
+## Arquivos de Deploy Disponíveis
 
-### 2. Configuração Railway (railway.json)
-```json
-{
-  "build": {
-    "builder": "nixpacks",
-    "buildCommand": "npm install && node init-data.js && node build.js"
-  },
-  "deploy": {
-    "startCommand": "node railway-start.js",
-    "healthcheckPath": "/api/health",
-    "healthcheckTimeout": 300,
-    "restartPolicyType": "ON_FAILURE",
-    "healthcheckInterval": 30,
-    "healthcheckGracePeriod": 60
-  }
-}
+### Opção 1: railway-simple.json (Recomendado)
+- Build automático com nixpacks
+- Start command simples: `node start-simple.js`
+- Sem healthcheck (evita problemas)
+
+### Opção 2: nixpacks-simple.toml
+- Configuração nixpacks personalizada
+- Build: npm install → init-data → npm run build
+- Start: node start-simple.js
+
+## Como o Deploy Funciona
+
+1. **Build**: 
+   - Instala dependências
+   - Inicializa dados CSV
+   - Builda frontend (vite) e backend (esbuild)
+
+2. **Start**:
+   - Inicializa dados se necessário
+   - Inicia servidor em produção na porta do Railway
+
+## Estrutura de Produção
+
+```
+dist/
+├── public/          # Frontend buildado
+│   ├── index.html
+│   └── assets/
+└── index.js         # Backend buildado
+
+data/                # Dados CSV
+├── portfolio.csv
+├── projects.csv
+├── experiences.csv
+├── skills.csv
+└── contacts.csv
 ```
 
-### 3. Arquivos de Suporte
-- `railway-start.js` - Script específico para Railway
-- `build.js` - Script de build com npx
-- `init-data.js` - Inicialização de dados CSV
-- `diagnose.js` - Diagnóstico de problemas
+## Troubleshooting
 
-## Critérios para Healthcheck Passar
+- **Container para em "Starting"**: Use railway-simple.json
+- **Erro de porta**: Railway define PORT automaticamente
+- **Dados não aparecem**: init-data.js cria os CSVs automaticamente
 
-### Railway espera:
-1. **Status HTTP 200** no endpoint configurado
-2. **Resposta JSON válida** 
-3. **Tempo de resposta < 30s**
-4. **Servidor escutando na porta $PORT**
-5. **Endpoint acessível em 0.0.0.0**
+## Scripts Importantes
 
-### Testado localmente:
-```bash
-# Teste 1: Endpoint principal
-curl -v http://localhost:5000/health
-# Resultado: HTTP 200 ✅
-
-# Teste 2: Endpoint API
-curl -v http://localhost:5000/api/health
-# Resultado: HTTP 200 ✅
-
-# Teste 3: Servidor produção
-NODE_ENV=production node dist/index.js
-# Resultado: Servidor iniciado ✅
-```
-
-## Possíveis Causas do Problema
-
-### 1. Timing de Inicialização
-- Servidor demora para inicializar
-- Dados CSV demoram para carregar
-- **Solução**: Grace period de 60s
-
-### 2. Configuração de Porta
-- Railway usa porta dinâmica ($PORT)
-- **Solução**: Servidor configurado para usar process.env.PORT
-
-### 3. Binding de Interface
-- Servidor deve escutar em 0.0.0.0
-- **Solução**: server.listen(port, "0.0.0.0")
-
-### 4. Dependências de Build
-- Dependências dev não instaladas
-- **Solução**: npm install completo no build
-
-## Próximos Passos
-
-### Alternativa 1: Remover Dockerfile
-Railway prefere usar nixpacks automaticamente:
-```bash
-# Remover Dockerfile e deixar Railway detectar Node.js
-rm Dockerfile
-```
-
-### Alternativa 2: Usar PORT dinâmico
-```bash
-# Testar com porta dinâmica
-PORT=8080 node dist/index.js
-```
-
-### Alternativa 3: Simplificar healthcheck
-```json
-{
-  "healthcheckPath": "/health",
-  "healthcheckTimeout": 120,
-  "healthcheckGracePeriod": 30
-}
-```
-
-## Logs Importantes
-
-Durante deploy no Railway, verificar:
-1. Servidor iniciou na porta correta
-2. Endpoint /health responde HTTP 200
-3. Dados CSV foram inicializados
-4. Sem erros de dependências
-
-## Contato para Suporte
-
-Se o problema persistir, Railway oferece suporte via:
-- Discord: https://discord.gg/railway
-- GitHub Issues: https://github.com/railwayapp/railway/issues
-- Documentação: https://docs.railway.app/
+- `start-simple.js`: Script de inicialização simples para produção
+- `init-data.js`: Cria arquivos CSV com dados do portfolio
+- `build.js`: Build padrão (vite + esbuild)

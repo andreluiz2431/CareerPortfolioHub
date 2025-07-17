@@ -1,16 +1,9 @@
 [phases.build]
-dependsOn = ["install"]
 cmds = [
-    "npm install",
-    "node init-data.js",
-    "node build.js"
+  "npm install",
+  "node init-data.js",
+  "npm run build"
 ]
 
-[phases.install]
-cmds = ["npm install"]
-
 [start]
-cmd = "node init-data.js && NODE_ENV=production node dist/index.js"
-
-[variables]
-NODE_ENV = "production"
+cmd = "node start-simple.js"

@@ -1,9 +1,8 @@
 {
   "build": {
-    "builder": "nixpacks",
-    "buildCommand": "npm install && node init-data.js && node build.js"
+    "builder": "nixpacks"
   },
   "deploy": {
-    "startCommand": "node init-data.js && NODE_ENV=production node dist/index.js"
+    "startCommand": "node start-simple.js"
   }
 }

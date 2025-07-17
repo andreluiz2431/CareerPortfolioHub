@@ -1,0 +1,12 @@
+[phases.build]
+dependsOn = ["install"]
+cmds = [
+    "node init-data.js",
+    "node build.js"
+]
+
+[phases.install]
+cmds = ["npm install"]
+
+[start]
+cmd = "node init-data.js && npm start"

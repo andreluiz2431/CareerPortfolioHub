@@ -1,0 +1,73 @@
+
+added 373 packages, and audited 374 packages in 6s
+
+53 packages are looking for funding
+  run `npm fund` for details
+
+
+1 low severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.4.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+npm notice To update run: npm install -g npm@11.4.2
+npm notice
+
+[4/8] RUN npm ci --only=production  ✔ 5 s
+
+[5/8] COPY . .
+
+[5/8] COPY . .  ✔ 108 ms
+
+[6/8] RUN node init-data.js && node build.js
+
+Data initialization complete!
+
+Starting build process...
+
+Building frontend...
+
+npm warn exec The following package was not found and will be installed: vite@6.3.5
+
+failed to load config from /app/vite.config.ts
+
+error during build:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'vite' imported from /app/node_modules/.vite-temp/vite.config.ts.timestamp-1752773610407-aa5470ba651ff.mjs
+    at new NodeError (node:internal/errors:405:5)
+    at packageResolve (node:internal/modules/esm/resolve:916:9)
+    at moduleResolve (node:internal/modules/esm/resolve:973:20)
+    at defaultResolve (node:internal/modules/esm/resolve:1206:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:404:12)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:373:25)
+    at ModuleLoader.getModuleJob (node:internal/modules/esm/loader:250:38)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/module_job:76:39)
+    at link (node:internal/modules/esm/module_job:75:36)
+
+Build failed: Command failed: npx vite build
+
+✕ [6/8] RUN node init-data.js && node build.js 
+process "/bin/sh -c node init-data.js && node build.js" did not complete successfully: exit code: 1
+ 
+
+Dockerfile:17
+
+-------------------
+
+15 |
+
+16 |     # Initialize data and build the application
+
+17 | >>> RUN node init-data.js && node build.js
+
+18 |
+
+19 |     # Expose the port
+
+-------------------
+
+ERROR: failed to build: failed to solve: process "/bin/sh -c node init-data.js && node build.js" did not complete successfully: exit code: 1

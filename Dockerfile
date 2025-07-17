@@ -1,29 +1,26 @@
-# Use Node.js official image
+# Railway will use nixpacks by default
+# This Dockerfile is optional - Railway can detect Node.js automatically
 FROM node:18-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install all dependencies (including devDependencies for build)
+RUN npm install
 
 # Copy source code
 COPY . .
 
-# Initialize data and build the application
+# Initialize data and build
 RUN node init-data.js && node build.js
 
-# Expose the port
+# Clean up dev dependencies after build
+RUN npm prune --production
+
+# Expose port
 EXPOSE 5000
-
-# Create data directory
-RUN mkdir -p /app/data
-
-# Copy data files to production directory
-COPY data/ /app/data/
 
 # Start the application
 CMD ["npm", "start"]

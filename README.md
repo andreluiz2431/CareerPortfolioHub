@@ -47,11 +47,14 @@ Um portfólio moderno e responsivo desenvolvido em React com tema escuro inspira
 
 ### Configurações Railway
 
-O projeto inclui:
-- `railway.json` - Configurações de build e deploy
-- `Dockerfile` - Container para deploy
+O projeto inclui múltiplas opções de deploy:
+- `railway.json` - Configurações de build e deploy (recomendado)
+- `nixpacks.toml` - Configuração alternativa para Railway
+- `Dockerfile` - Container para deploy (opcional)
 - `init-data.js` - Inicialização dos dados CSV
 - `build.js` - Script de build customizado
+
+**Recomendação:** Use o `railway.json` que foi otimizado para resolver problemas de dependências.
 
 ## Estrutura do Projeto
 

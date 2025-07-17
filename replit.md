@@ -8,6 +8,16 @@ This is a modern full-stack portfolio application built with React, Express, and
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### Data Integration (Janeiro 2025)
+- Integração completa dos dados do currículo do André Luiz Montanha
+- Adição de informações pessoais e profissionais ao portfolio.csv
+- Cadastro de 4 experiências profissionais no experiences.csv
+- Inclusão de 35 habilidades técnicas organizadas por categoria no skills.csv
+- Criação de 5 projetos exemplo baseados no perfil profissional no projects.csv
+- Portfolio agora reflete o perfil real do desenvolvedor com foco em React, Angular, Firebase e infraestrutura
+
 ## System Architecture
 
 ### Frontend Architecture

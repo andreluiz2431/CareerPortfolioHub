@@ -1,1 +1,6 @@
 id,name,description,githubUrl,liveUrl,stars,technologies,featured
+1,Sistema de Automação CAAL,Sistema desenvolvido para automação de processos administrativos na cooperativa agroindustrial. Incluí controle de estoque gestão de pedidos e relatórios automatizados.,https://github.com/andreluiz2431/sistema-caal,,0,Python;SQL;Oracle;TOTVS Protheus,true
+2,Aplicativo React Dashboard,Dashboard administrativo desenvolvido em React para gestão de dados e relatórios. Interface moderna e responsiva com integração de APIs.,https://github.com/andreluiz2431/react-dashboard,,0,React;TypeScript;TailwindCSS;Node.js,true
+3,Sistema de Monitoramento CFTV,Sistema de monitoramento e gestão de câmeras de segurança desenvolvido para controle de acesso e gravação de imagens.,https://github.com/andreluiz2431/cftv-monitor,,0,Python;SQL;Hardware Integration,false
+4,Portfolio Angular,Portfólio pessoal desenvolvido em Angular com design moderno e responsivo. Inclui seções de projetos experiências e habilidades.,https://github.com/andreluiz2431/portfolio-angular,,0,Angular;TypeScript;SCSS;Firebase,true
+5,Automação de Processos A&Z,Sistema de automação para emissão de notas fiscais gestão de estoque e controle de clientes desenvolvido para A&Z Cosméticos.,https://github.com/andreluiz2431/automacao-az,,0,Python;SQL;ERP Integration,false

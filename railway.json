@@ -4,9 +4,11 @@
     "buildCommand": "npm install && node init-data.js && node build.js"
   },
   "deploy": {
-    "startCommand": "node init-data.js && npm start",
-    "healthcheckPath": "/health",
+    "startCommand": "node railway-start.js",
+    "healthcheckPath": "/api/health",
     "healthcheckTimeout": 300,
-    "restartPolicyType": "ON_FAILURE"
+    "restartPolicyType": "ON_FAILURE",
+    "healthcheckInterval": 30,
+    "healthcheckGracePeriod": 60
   }
 }

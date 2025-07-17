@@ -42,9 +42,9 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
+    
+    log(`Error: ${status} - ${message}`);
     res.status(status).json({ message });
-    throw err;
   });
 
   // importantly only setup vite in development and after
@@ -66,5 +66,20 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
     log(`NODE_ENV: ${process.env.NODE_ENV}`);
     log(`Health check available at: http://0.0.0.0:${port}/health`);
+    
+    // Test health endpoint after server starts
+    if (process.env.NODE_ENV === "production") {
+      setTimeout(() => {
+        import('http').then(({ get }) => {
+          const req = get(`http://localhost:${port}/health`, (res) => {
+            log(`Health check test: ${res.statusCode}`);
+            req.destroy();
+          });
+          req.on('error', (err) => {
+            log(`Health check test failed: ${err.message}`);
+          });
+        });
+      }, 1000);
+    }
   });
 })();

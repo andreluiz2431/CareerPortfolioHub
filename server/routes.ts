@@ -18,12 +18,17 @@ const authSchema = z.object({
 export async function registerRoutes(app: Express): Promise<Server> {
   // Health check endpoints - must be first to avoid conflicts with static serving
   app.get("/health", (req, res) => {
-    res.json({ status: "ok", timestamp: new Date().toISOString() });
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString(), service: "portfolio-api" });
   });
 
   // Root API endpoint for health check
   app.get("/api/health", (req, res) => {
-    res.json({ status: "ok", timestamp: new Date().toISOString() });
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString(), service: "portfolio-api" });
+  });
+
+  // Railway healthcheck endpoint (sometimes Railway uses this)
+  app.get("/healthz", (req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString(), service: "portfolio-api" });
   });
 
   // Authentication

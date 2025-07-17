@@ -4,6 +4,6 @@
     "buildCommand": "npm install && npm run build"
   },
   "deploy": {
-    "startCommand": "npm run dev"
+    "startCommand": "node init-data.js && NODE_ENV=production node dist/index.js"
   }
 }

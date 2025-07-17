@@ -16,6 +16,16 @@ const authSchema = z.object({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoints - must be first to avoid conflicts with static serving
+  app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // Root API endpoint for health check
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Authentication
   app.post("/api/auth/login", async (req, res) => {
     try {

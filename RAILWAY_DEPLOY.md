@@ -2,19 +2,29 @@
 
 ## Deploy Simples (Recomendado)
 
-1. **Renomeie o arquivo**: `railway-simple.json` para `railway.json`
+1. **Renomeie o arquivo**: `railway-final.json` para `railway.json`
 2. **Faça o deploy no Railway**
 3. **Configure a variável PORT**: O Railway define automaticamente
 4. **Done!** - O site estará online
 
 ## Arquivos de Deploy Disponíveis
 
-### Opção 1: railway-simple.json (Recomendado)
+### Opção 1: railway-final.json (Recomendado - Fullstack)
+- Build: npm install → npm run build
+- Start: node init-data.js → NODE_ENV=production node dist/index.js
+- Inclui API backend + frontend estático
+
+### Opção 2: railway-simple.json (Backup)
 - Build automático com nixpacks
 - Start command simples: `node start-simple.js`
 - Sem healthcheck (evita problemas)
 
-### Opção 2: nixpacks-simple.toml
+### Opção 3: railway-static.json (Apenas Frontend)
+- Build: npm install → node build-static.js
+- Start: npx serve dist -s -p $PORT
+- Apenas arquivos estáticos (sem API)
+
+### Opção 4: nixpacks-simple.toml
 - Configuração nixpacks personalizada
 - Build: npm install → init-data → npm run build
 - Start: node start-simple.js

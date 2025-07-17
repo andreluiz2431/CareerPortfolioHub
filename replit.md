@@ -20,6 +20,8 @@ Preferred communication style: Simple, everyday language.
 - ✅ Múltiplas opções de deploy: railway.json, railway-simple.json, nixpacks
 - ✅ Documentação completa sobre como ignorar healthcheck
 - ✅ Teste local e de produção confirmaram funcionamento completo
+- ✅ Serve package instalado para opção de deploy estático
+- ✅ Configuração railway-final.json com npm run build padrão
 
 ### Data Integration (Janeiro 2025)
 - Integração completa dos dados do currículo do André Luiz Montanha

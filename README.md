@@ -48,13 +48,21 @@ Um portfólio moderno e responsivo desenvolvido em React com tema escuro inspira
 ### Configurações Railway
 
 O projeto inclui múltiplas opções de deploy:
-- `railway.json` - Configurações de build e deploy (recomendado)
-- `nixpacks.toml` - Configuração alternativa para Railway
-- `Dockerfile` - Container para deploy (opcional)
-- `init-data.js` - Inicialização dos dados CSV
-- `build.js` - Script de build customizado
 
-**Recomendação:** Use o `railway.json` que foi otimizado para resolver problemas de dependências.
+#### Opção 1: Sem Healthcheck (Recomendado)
+- `railway.json` - Configuração simplificada sem healthcheck
+- `railway-simple.json` - Versão ainda mais simples
+- `nixpacks-simple.toml` - Configuração nixpacks sem healthcheck
+
+#### Opção 2: Com Healthcheck
+- `railway.json` com healthcheck configurado
+- Endpoints `/health`, `/api/health` e `/healthz`
+
+#### Opção 3: Deploy Automático
+- Remover todos os arquivos de configuração
+- Deixar Railway detectar Node.js automaticamente
+
+**Recomendação:** Use `railway.json` atual (sem healthcheck) para evitar problemas de deploy.
 
 ## Estrutura do Projeto
 

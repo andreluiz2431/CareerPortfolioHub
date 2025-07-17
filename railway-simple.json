@@ -4,7 +4,6 @@
     "buildCommand": "npm install && node init-data.js && node build.js"
   },
   "deploy": {
-    "startCommand": "node railway-start.js",
-    "restartPolicyType": "ON_FAILURE"
+    "startCommand": "node init-data.js && NODE_ENV=production node dist/index.js"
   }
 }

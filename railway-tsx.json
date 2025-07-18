@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "npm install && node init-data.js"
+  },
+  "deploy": {
+    "startCommand": "npm run dev"
+  }
+}

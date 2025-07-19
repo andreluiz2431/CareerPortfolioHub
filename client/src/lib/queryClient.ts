@@ -1,4 +1,14 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { mockPortfolioData, mockExperiences, mockProjects, mockSkills, mockContacts } from "@/data/mockData";
+
+// Mock data mapping for static deployment
+const mockDataMap: Record<string, any> = {
+  "/api/portfolio": mockPortfolioData,
+  "/api/experiences": mockExperiences,
+  "/api/projects": mockProjects,
+  "/api/skills": mockSkills,
+  "/api/contacts": mockContacts,
+};
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -12,6 +22,15 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  // For static deployment, simulate API responses
+  if (mockDataMap[url]) {
+    const mockData = method === "POST" && data ? [...mockDataMap[url], data] : mockDataMap[url];
+    return new Response(JSON.stringify(mockData), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const res = await fetch(url, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
@@ -29,7 +48,14 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
+    const url = queryKey.join("/") as string;
+    
+    // Return mock data for static deployment
+    if (mockDataMap[url]) {
+      return mockDataMap[url];
+    }
+
+    const res = await fetch(url, {
       credentials: "include",
     });
 

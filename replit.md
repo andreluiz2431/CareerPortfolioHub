@@ -23,6 +23,14 @@ Preferred communication style: Simple, everyday language.
 - ✅ Serve package instalado para opção de deploy estático
 - ✅ Configuração railway-final.json com npm run build padrão
 
+### Simplificação para Frontend Estático (Janeiro 2025)
+- ✅ Package.json simplificado para usar apenas Vite
+- ✅ Dados mockados criados em client/src/data/mockData.ts
+- ✅ QueryClient modificado para usar dados estáticos
+- ✅ railway-vite-only.json para deploy estático simples
+- ✅ DEPLOY-GUIDE.md com guia completo de deploy
+- ✅ Aplicação funciona 100% sem backend para deploy simples
+
 ### Data Integration (Janeiro 2025)
 - Integração completa dos dados do currículo do André Luiz Montanha
 - Adição de informações pessoais e profissionais ao portfolio.csv

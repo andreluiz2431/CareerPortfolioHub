@@ -1,9 +1,0 @@
-{
-  "build": {
-    "builder": "nixpacks",
-    "buildCommand": "npm install"
-  },
-  "deploy": {
-    "startCommand": "node railway-deploy.js"
-  }
-}

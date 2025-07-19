@@ -1,9 +1,0 @@
-[phases.build]
-cmds = [
-  "npm install",
-  "node init-data.js",
-  "npm run build"
-]
-
-[start]
-cmd = "node start-simple.js"

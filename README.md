@@ -40,29 +40,17 @@ Um portfólio moderno e responsivo desenvolvido em React com tema escuro inspira
 3. As configurações estão em `railway.json`
 
 ### Opção 2: Deploy Manual
-1. Inicialize os dados: `node init-data.js`
-2. Faça build do projeto: `node build.js`
-3. Inicie o servidor: `npm start`
-4. Configure as variáveis de ambiente se necessário
+1. Faça build do projeto: `npm run build`
+2. Suba os arquivos para o Railway
+3. Configure as variáveis de ambiente se necessário
 
 ### Configurações Railway
 
-O projeto inclui múltiplas opções de deploy:
-
-#### Opção 1: Sem Healthcheck (Recomendado)
-- `railway.json` - Configuração simplificada sem healthcheck
-- `railway-simple.json` - Versão ainda mais simples
-- `nixpacks-simple.toml` - Configuração nixpacks sem healthcheck
-
-#### Opção 2: Com Healthcheck
-- `railway.json` com healthcheck configurado
-- Endpoints `/health`, `/api/health` e `/healthz`
-
-#### Opção 3: Deploy Automático
-- Remover todos os arquivos de configuração
-- Deixar Railway detectar Node.js automaticamente
-
-**Recomendação:** Use `railway.json` atual (sem healthcheck) para evitar problemas de deploy.
+O projeto inclui:
+- `railway.json` - Configurações de build e deploy
+- `Dockerfile` - Container para deploy
+- `init-data.js` - Inicialização dos dados CSV
+- `build.js` - Script de build customizado
 
 ## Estrutura do Projeto
 

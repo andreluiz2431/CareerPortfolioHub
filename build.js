@@ -1,24 +1,36 @@
 import { execSync } from 'child_process';
-import { existsSync, mkdirSync } from 'fs';
+import { copyFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
+import { join, dirname } from 'path';
 
-try {
-  console.log('Starting build process...');
-  
-  // Ensure dist directory exists
-  if (!existsSync('dist')) {
-    mkdirSync('dist', { recursive: true });
+// Function to copy directory recursively
+function copyDir(src, dest) {
+  if (!existsSync(dest)) {
+    mkdirSync(dest, { recursive: true });
   }
   
-  // Build frontend with vite
-  console.log('Building frontend...');
-  execSync('npx vite build', { stdio: 'inherit' });
+  const files = readdirSync(src);
   
-  // Build backend with esbuild
-  console.log('Building backend...');
-  execSync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:vite --external:@vitejs/plugin-react --external:tailwindcss --external:autoprefixer --external:postcss --external:typescript', { stdio: 'inherit' });
-  
-  console.log('Build completed successfully!');
-} catch (error) {
-  console.error('Build failed:', error.message);
-  process.exit(1);
+  for (const file of files) {
+    const srcPath = join(src, file);
+    const destPath = join(dest, file);
+    
+    if (statSync(srcPath).isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      copyFileSync(srcPath, destPath);
+    }
+  }
 }
+
+console.log('Building frontend...');
+execSync('vite build', { stdio: 'inherit' });
+
+console.log('Building backend...');
+execSync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
+
+console.log('Copying data files...');
+if (existsSync('data')) {
+  copyDir('data', 'dist/data');
+}
+
+console.log('Build complete!');

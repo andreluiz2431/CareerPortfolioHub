@@ -42,15 +42,15 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-    
-    log(`Error: ${status} - ${message}`);
+
     res.status(status).json({ message });
+    throw err;
   });
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (process.env.NODE_ENV === "development") {
+  if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
@@ -61,25 +61,11 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  
-  server.listen(port, "0.0.0.0", () => {
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true,
+  }, () => {
     log(`serving on port ${port}`);
-    log(`NODE_ENV: ${process.env.NODE_ENV}`);
-    log(`Health check available at: http://0.0.0.0:${port}/health`);
-    
-    // Test health endpoint after server starts
-    if (process.env.NODE_ENV === "production") {
-      setTimeout(() => {
-        import('http').then(({ get }) => {
-          const req = get(`http://localhost:${port}/health`, (res) => {
-            log(`Health check test: ${res.statusCode}`);
-            req.destroy();
-          });
-          req.on('error', (err) => {
-            log(`Health check test failed: ${err.message}`);
-          });
-        });
-      }, 1000);
-    }
   });
 })();

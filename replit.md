@@ -10,27 +10,6 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### Railway Deploy Fix (Janeiro 2025)
-- ✅ Problema de deploy no Railway totalmente resolvido
-- ✅ Script build-railway.js criado excluindo dependências de desenvolvimento
-- ✅ Configuração railway.json otimizada sem healthcheck
-- ✅ Dependências vite e outras dev dependencies excluídas do build
-- ✅ Sistema de inicialização de dados melhorado (init-data.js)
-- ✅ Endpoints de saúde /health e /api/health implementados
-- ✅ Múltiplas opções de deploy: railway.json, railway-simple.json, nixpacks
-- ✅ Documentação completa sobre como ignorar healthcheck
-- ✅ Teste local e de produção confirmaram funcionamento completo
-- ✅ Serve package instalado para opção de deploy estático
-- ✅ Configuração railway-final.json com npm run build padrão
-
-### Simplificação para Frontend Estático (Janeiro 2025)
-- ✅ Package.json simplificado para usar apenas Vite
-- ✅ Dados mockados criados em client/src/data/mockData.ts
-- ✅ QueryClient modificado para usar dados estáticos
-- ✅ railway-vite-only.json para deploy estático simples
-- ✅ DEPLOY-GUIDE.md com guia completo de deploy
-- ✅ Aplicação funciona 100% sem backend para deploy simples
-
 ### Data Integration (Janeiro 2025)
 - Integração completa dos dados do currículo do André Luiz Montanha
 - Adição de informações pessoais e profissionais ao portfolio.csv

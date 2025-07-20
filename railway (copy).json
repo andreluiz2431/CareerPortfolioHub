@@ -1,10 +1,10 @@
 {
   "build": {
     "builder": "nixpacks",
-    "buildCommand": "npm install"
+    "buildCommand": "node init-data.js && npm run build"
   },
   "deploy": {
-    "startCommand": "npm run dev",
+    "startCommand": "node init-data.js && npm start",
     "healthcheckPath": "/",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE"

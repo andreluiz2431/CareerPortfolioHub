@@ -1,29 +1,29 @@
 # Use Node.js official image
-FROM node:18-alpine
+#FROM node:18-alpine
 
 # Set working directory
-WORKDIR /app
+#WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+#COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+#RUN npm ci --only=production
 
 # Copy source code
-COPY . .
+#COPY . .
 
 # Build the application
-RUN npm run build
+#RUN npm run build
 
 # Expose the port
-EXPOSE 5000
+#EXPOSE 5000
 
 # Create data directory
-RUN mkdir -p /app/data
+#RUN mkdir -p /app/data
 
 # Copy data files to production directory
-COPY data/ /app/data/
+#COPY data/ /app/data/
 
 # Start the application
-CMD ["npm", "start"]
+#CMD ["npm", "start"]

@@ -26,11 +26,11 @@ app.use((req, res, next) => {
   const server = await registerRoutes(app);
 
   // Servir arquivos estáticos do build
-  app.use(express.static(path.join(__dirname, "../dist/public")));
+  app.use(express.static(path.join(__dirname, "public")));
 
   // Catch-all handler: send back React's index.html file
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist/public/index.html"));
+    res.sendFile(path.join(__dirname, "public/index.html"));
   });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

@@ -11,6 +11,11 @@ app.get("/", (_req: Request, res: Response) => {
   res.status(200).send("OK from Railway!");
 });
 
+// Rota de healthcheck
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", uptime: process.uptime() });
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;

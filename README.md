@@ -56,13 +56,32 @@ O projeto inclui:
 
 ```
 /
-├── client/          # Frontend React
-├── server/          # Backend Express
-├── shared/          # Schemas TypeScript compartilhados
-├── data/            # Arquivos CSV de dados
-├── dist/            # Build de produção
-└── components.json  # Configuração shadcn/ui
-```
+├── client/             # Frontend React com TypeScript, TailwindCSS e TanStack Query
+│   ├── src/              # Código fonte da aplicação React
+│   ├── components/       # Componentes reutilizáveis
+│   ├── pages/            # Páginas da aplicação
+│   ├── services/         # Camada de serviços para chamadas à API
+│   ├── utils/             # Funções utilitárias
+│   ├── App.tsx           # Componente principal da aplicação
+│   └── index.tsx         # Ponto de entrada da aplicação
+├── server/             # Backend Express com Node.js e TypeScript
+│   ├── src/              # Código fonte do servidor
+│   ├── controllers/      # Controladores para as rotas
+│   ├── routes/           # Definição das rotas da API
+│   ├── middlewares/      # Middlewares para tratamento de requisições
+│   ├── models/           # Definição dos modelos de dados
+│   ├── utils/             # Funções utilitárias
+│   └── server.ts         # Ponto de entrada do servidor
+├── shared/             # Schemas TypeScript compartilhados entre frontend e backend
+│   ├── types/            # Definição de tipos
+│   └── interfaces/       # Definição de interfaces
+├── data/               # Arquivos CSV de dados (projetos, experiências, habilidades)
+├── dist/               # Build de produção (gerado pelo Vite)
+├── railway.json        # Configurações para deploy no Railway
+├── Dockerfile          # Arquivo Docker para containerização
+├── init-data.js        # Script para inicializar os dados CSV
+├── build.js            # Script de build customizado
+└── components.json     # Configuração shadcn/ui
 
 ## Variáveis de Ambiente
 

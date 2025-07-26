@@ -1,19 +1,15 @@
 import admin from 'firebase-admin';
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-// Corrige __dirname para ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const serviceAccount = JSON.parse(
-  readFileSync(resolve(__dirname, './serviceAccountKey.json'), 'utf-8')
-);
+import dotenv from 'dotenv';
+dotenv.config();
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      // Remove as aspas extras e substitua '\\n' por '\n'
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    }),
   });
 }
 

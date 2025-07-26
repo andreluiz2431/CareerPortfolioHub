@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Lock, LogOut } from "lucide-react";
+import { usePortfolio } from "@/hooks/use-portfolio";
+import profileImage from "../../../data/assets/images/perfil.jpg";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isAuthenticated, logout } = useAuth();
+  const { data: portfolio } = usePortfolio();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,10 +34,14 @@ export default function Header() {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-              <i className="fas fa-code text-white text-sm"></i>
+            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center overflow-hidden border-2 border-blue-500">
+              <img 
+                src={profileImage} 
+                alt="Profile" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <span className="text-xl font-semibold">Portfolio</span>
+            <span className="text-xl font-semibold">{portfolio?.name}</span>
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">

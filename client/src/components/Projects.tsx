@@ -4,11 +4,23 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { Edit3, Plus, Star, Github, ExternalLink, Code } from "lucide-react";
 import type { Project } from "@shared/schema";
+import type { Portfolio } from "@shared/types";
 
 export default function Projects() {
   const { isAuthenticated } = useAuth();
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
+  });
+
+  const { data: portfolio } = useQuery<Portfolio>({
+    queryKey: ["portfolio"],
+    queryFn: async () => {
+      const response = await fetch("/api/portfolio");
+      if (!response.ok) {
+        throw new Error("Failed to fetch portfolio data");
+      }
+      return response.json();
+    },
   });
 
   const handleEdit = (project: Project) => {
@@ -166,10 +178,17 @@ export default function Projects() {
             
             <div className="text-center mt-12">
               <Button
+                asChild
                 variant="outline"
                 className="border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-8 py-3 font-medium transition-all duration-300 hover:scale-105"
               >
-                View All Projects on GitHub
+                <a 
+                  href={portfolio?.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  View All Projects on GitHub
+                </a>
               </Button>
             </div>
           </>

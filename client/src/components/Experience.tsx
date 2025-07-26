@@ -107,7 +107,12 @@ export default function Experience() {
                       {experience.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {experience.technologies?.map((tech, techIndex) => (
+                      {(Array.isArray(experience.technologies)
+                        ? experience.technologies
+                        : typeof experience.technologies === "string"
+                          ? experience.technologies.split(/[;,]\s*/).filter(Boolean)
+                          : []
+                      ).map((tech, techIndex) => (
                         <span 
                           key={techIndex}
                           className="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-sm"

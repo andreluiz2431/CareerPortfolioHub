@@ -136,7 +136,12 @@ export default function Projects() {
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies?.map((tech, index) => (
+                      {(Array.isArray(project.technologies)
+                        ? project.technologies
+                        : typeof project.technologies === "string"
+                          ? project.technologies.split(/[;,]\s*/)
+                          : []
+                      ).map((tech, index) => (
                         <span 
                           key={index}
                           className="px-2 py-1 bg-blue-500/10 text-blue-500 rounded text-xs"

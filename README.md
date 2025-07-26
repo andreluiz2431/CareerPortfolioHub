@@ -1,4 +1,4 @@
-# Career Portfolio Hub
+# Career Portfolio Hub - GIT: andreluiz2431
 
 A modern full-stack portfolio application with an admin interface, built using React, Express, and TypeScript. Features a sleek dark theme inspired by SpaceX's aesthetic.
 

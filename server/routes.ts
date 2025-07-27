@@ -151,6 +151,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         : db.collection('experiences');
       const snapshot = await query.get();
       const experiences = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      // Sort experiences by period in descending order
+      experiences.sort((a, b) => {
+        if (a.period && b.period) {
+          return b.period.localeCompare(a.period);
+        }
+        return 0;
+      });
+
       res.json(experiences);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch experiences" });

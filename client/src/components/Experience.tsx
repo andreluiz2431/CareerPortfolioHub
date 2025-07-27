@@ -1,14 +1,26 @@
+import { sortByPeriod } from "@/lib/sort-helper";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { Edit3, Plus } from "lucide-react";
+import { Edit3, Plus, ArrowDownUp } from "lucide-react";
 import type { Experience } from "@shared/schema";
+import { useState } from "react";
 
 export default function Experience() {
   const { isAuthenticated } = useAuth();
+  const [sortOrder, setSortOrder] = useState("desc");
   const { data: experiences = [], isLoading } = useQuery<Experience[]>({
     queryKey: ["/api/experiences"],
+    select: (data) => {
+      return [...data].sort((a, b) => {
+        if (sortOrder === "desc") {
+          return sortByPeriod(a, b);
+        } else {
+          return sortByPeriod(b, a);
+        }
+      });
+    },
   });
 
   const handleEdit = (experience: Experience) => {
@@ -60,6 +72,14 @@ export default function Experience() {
                 <Plus className="w-4 h-4" />
               </Button>
             )}
+            <Button
+              onClick={() => setSortOrder(sortOrder === "desc" ? "asc" : "desc")}
+              variant="ghost"
+              size="sm"
+              className="text-blue-500 hover:text-blue-400"
+            >
+              <ArrowDownUp className="w-4 h-4" />
+            </Button>
           </div>
           <div className="w-24 h-1 bg-blue-500 mx-auto"></div>
         </div>
@@ -78,7 +98,7 @@ export default function Experience() {
               )}
             </div>
           ) : (
-            experiences.map((experience, index) => (
+            experiences.map((experience) => (
               <div key={experience.id} className="relative pl-8 pb-12 timeline-line">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-500 rounded-full border-4 border-black"></div>
                 

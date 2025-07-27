@@ -7,3 +7,4 @@ vite.config.ts.*
 .env
 serviceAccountKey.json
 steps.md
+GEMINI.md
